@@ -1,0 +1,45 @@
+{
+  "name": "codezero/encrypter",
+  "description": "Encrypt and decrypt strings in PHP.",
+  "keywords": [
+    "encryption",
+    "encrypt",
+    "php",
+    "laravel"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Vermeyen",
+      "email": "ivan@codezero.be"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "illuminate/contracts": ">=5.0",
+    "illuminate/encryption": ">=5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~8.0"
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "autoload": {
+    "psr-4": {
+      "CodeZero\\Encrypter\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CodeZero\\Encrypter\\Tests\\": "tests"
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

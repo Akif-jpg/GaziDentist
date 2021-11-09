@@ -1,0 +1,8 @@
+{
+    "require": {
+        "monolog/monolog": "^2.3",
+        "codezero/encrypter": "^2.0",
+        "ircmaxell/random-lib": "^1.2"
+        
+    }
+}

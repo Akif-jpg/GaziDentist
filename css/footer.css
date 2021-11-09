@@ -1,0 +1,25 @@
+.footer{
+    position: absolute;
+    background-color: #222222;
+    width: 100%;
+    height: max-content;
+    left: 0px;
+    padding-top: var(--theme-footer-padding-top);
+    padding-bottom: var(--theme-footer-padding-bottom);   
+    z-index: 2;
+}
+
+.description{
+    padding-top: 30px;
+    padding-left: 90px;
+    padding-right: 90px;
+    color: bisque;
+}
+
+.footerHeader{
+    color: whitesmoke;
+}
+
+.footerIcon{
+    font-size: 48px;
+}
