@@ -3,6 +3,7 @@
 <?php include_once "../includes/navigation.php";?>
 <?php include_once "../authors/includes/user_functions.php"?>
 <?php include_once "../includes/consts.php";?> 
+<?php include_once "../vendor/autoload.php";?> 
 
 
 
@@ -14,7 +15,15 @@
         <div class="container">
             <!-- /.row -->
             <div class="row">
-                           <?php                            
+          <?php              
+                //setting logger
+                use Monolog\Logger;
+                use Monolog\Handler\StreamHandler;
+
+                // create a log channel
+                $logger = new Logger('user_profile');
+                $logger->pushHandler(new StreamHandler('../logs/general.log', Logger::INFO));    
+
                 if(isset($_SESSION['username'])){
                     $get_username = $_SESSION['username'];                    
                     if($get_username != ''){
@@ -85,7 +94,7 @@
                                 $query .="user_sex   =  '{$user_sex}', ";
                                 $query .="user_email = '{$user_email}'";
                                 $query .= " WHERE username = '{$get_username}' ";
-                                $edit_user_query = mysqli_query($connection,$query);
+                               $connection->query($query) or die($logger->error(mysqli_error($connection)));
                                 
                                 header("Location: ../profile.php?user={$get_username}");
                         }
@@ -147,11 +156,18 @@
                                         <?php
                                         if($user_sex == 'Male') {
                                             echo "<option value='Female'>Female</option>";
+                                            echo "<option value='Other'>Other</option>";
                                         }else if($user_sex == 'Female'){
+                                            echo "<option value='Male'>Male</option>";
+                                            echo "<option value='Other'>Other</option>";
+                                        }else if($user_sex == 'Other'){
+                                            echo "<option value='Female'>Female</option>";
                                             echo "<option value='Male'>Male</option>";
                                         }else{
                                             echo "<option value='Female'>Female</option>";
                                             echo "<option value='Male'>Male</option>";
+                                            echo "<option value='Other'>Other</option>";
+                                            
                                         }
                                     ?>
                                         </select>

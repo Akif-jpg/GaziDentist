@@ -51,7 +51,6 @@
                         $msg_content = $row['msg_content'];
                         $msg_status = $row['msg_reply_status'];
                 ?>
-                        <!-- First Blog Post -->
                         <div style="justify-content:center;display:flex;">
                             <div class="w3-show-inline-block">
                                 <h2>                            
@@ -92,6 +91,8 @@
             </div>
         </div>
     </div>
+<!-- script sources -->
+<script src="/js/friendship_operations.js"></script>
 
 <?php include_once "../includes/sidebar.php"?>
 <?php include_once "../includes/footer.php"?>

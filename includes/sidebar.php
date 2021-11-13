@@ -53,7 +53,7 @@
                         $imagePath = "/images/user_pic/". $image;                
                     ?>
 
-                    <img class="userPorfileImage" src="<?php echo $imagePath?>" alt="user profile image">
+                    <img class="userPorfileImage" src="<?php echo $imagePath?>" alt="<?php echo $imagePath?>">
                     <div class="w3-padding-tiny">
                         <p><?php echo $firstname.' '.$lastname?></p>
                         <div class="w3-dropdown-hover">

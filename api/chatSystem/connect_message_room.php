@@ -18,9 +18,9 @@ global $connection;
    use Monolog\Logger;
    use Monolog\Handler\StreamHandler;
 
-   // create a log channel
-   $log = new Logger('messageRoomCreator');
-   $log->pushHandler(new StreamHandler('../../logs/connectRoom.log', Logger::INFO));
+   // create a logger channel
+   $logger = new Logger('messageRoomCreator');
+   $logger->pushHandler(new StreamHandler('../../logs/chatSystem.log', Logger::INFO));
 
    
     if(isset($_GET['roomId'])){
@@ -30,23 +30,13 @@ global $connection;
         session_start();
         if(isset($_SESSION['username'])){
             $getUsername = $_SESSION['username'];
-            $log->info("connected rooms: ".$_SESSION['connectedRooms']);
-            if(isset($_SESSION['connectedRooms']) && in_array($roomId,explode(",",$_SESSION['connectedRooms']))){      
-                $log->info("zaten giriş yapılmış");          
+            if(isset($_SESSION['connectedRooms']) && in_array($roomId,explode(",",$_SESSION['connectedRooms']))){                
                 $auth = true;
             }else{
                 $sql = "SELECT room_participiants FROM message_rooms WHERE id=$roomId";
-                $results = $connection->query($sql) or die($log->error(mysqli_error($connection)));
-                while($row = $results->fetch_assoc()){
-                    $log->info(explode(",",$row['room_participiants'])[0]);
-                    if(in_array($getUsername,explode(",",$row['room_participiants'])) or die($log->info("in array içinde hata var"))){
-                        $log->info("doğruluk değeri: "."true");
-                    }else{
-                        $log->info("doğruluk değeri: "."false");
-                    }
-                    $log->info("username: ".$getUsername);
-                    if( in_array($getUsername,explode(",",$row['room_participiants']))){
-                        $log->info($row['room_participiants']);
+                $results = $connection->query($sql) or die($logger->error(mysqli_error($connection)));
+                while($row = $results->fetch_assoc()){                
+                   if( in_array($getUsername,explode(",",$row['room_participiants']))){
                         $auth = true;
                         if(isset($_SESSION["connectedRooms"])){
                             $_SESSION['connectedRooms'] .= ",".$roomId;
@@ -60,10 +50,9 @@ global $connection;
 
         if($auth){
             //Kullanıcıdan gelen oda id içerisindeki mesajlaşma bilgilerini ve onları encrypt edecek olan password'u alıyoruz.
-            $log->info("auth sonrası işlemler");
+            $logger->info("auth sonrası işlemler");
             $sql = "SELECT messages,room_password FROM message_rooms WHERE id='$roomId'";
-            $results = $connection->query($sql) or die($log->error(mysqli_error($connection)));
-            $log->info("query gerçekleştirildi");
+            $results = $connection->query($sql) or die($logger->error(mysqli_error($connection)));
             $messages = "";
             $roomPassword = "";
 
@@ -71,10 +60,8 @@ global $connection;
                 $messages = $row["messages"];
                 $roomPassword = $row["room_password"];
             }
-            $log->info("bilgiler veritabanından çekildi: ".$messages."  oda şifresi: ".$roomPassword);
             $encrypter = new \CodeZero\Encrypter\DefaultEncrypter($roomPassword);
             $messages = $encrypter->decrypt($messages);
-            $log->info("decrypt edilmiş mesaj: ".$messages);
             echo $messages;
         }else{
             header("HTTP/1.1 403 Forbidden");
