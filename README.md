@@ -3,6 +3,7 @@ Diş hekimleri için yapılmış açık kaynak kodlu bir web sitesidir. Yapım s
  Üzerinde (ok) yazılanlar tamamlanmış demektir. Diğerleri ya yapım aşamasındadır ya da yapılacaktır.
  
  Yapılacaklar:  
+ 
       ->Sitenin içerisine kayıt olan her kişi için friends veri tabanına da bir takım veriler girilecek.(ok)
       
       ->Arkadaşlık isteği ayarlamalarına başlandı.(ok)
