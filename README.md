@@ -1,8 +1,7 @@
-Diş hekimleri için yapılmış açık kaynak kodlu bir web sitesidir. Yapım süreci devam etmektedir. Yapım süreci bittiğinde https://gazidentist.site adresinden ulaşılabilir olacaktır.
+ Diş hekimleri için yapılmış açık kaynak kodlu bir web sitesidir. Yapım süreci devam etmektedir. Yapım süreci bittiğinde https://gazidentist.site adresinden ulaşılabilir olacaktır.
 
- Üzerinde (ok) yazılanlar tamamlanmış demektir. Diğerleri ya yapım aşamasındadır ya da yapılacaktır.
- 
- Yapılacaklar:  
+  NOT:Üzerinde (ok) yazılanlar tamamlanmış demektir. Diğerleri ya yapım aşamasındadır ya da yapılacaktır.
+ Yapılacaklar:   
  
       ->Sitenin içerisine kayıt olan her kişi için friends veri tabanına da bir takım veriler girilecek.(ok)
       
