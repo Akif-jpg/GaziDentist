@@ -16,6 +16,10 @@ Diş hekimleri için yapılmış açık kaynak kodlu bir web sitesidir. Yapım s
 
     Projenin açıklanması:
       Proje içersinde mysql veri tabanı kullanılmaktadır. gazident_blog.sql kullanılarak veriabanı kolayca import edilebilir.
+      
       İncludes/db.php içerisinde veritabanı bağlantısıyla ilgili bilgiler bulunmaktadır. Örnek username, password...
+      
       Admin klasörü içerisinde admin kontrol panel ve author klasörünün içerisinde yazar kontrol paneli bulunmaktadır.
+      
       Eğer php ve mariadb veya mysql veritabanını indirmişseniz projeyi php -t <PROJECT_PATH> -S localhost:<PORT_NUMBER> diyerek başlatabilirsiniz.
+      
