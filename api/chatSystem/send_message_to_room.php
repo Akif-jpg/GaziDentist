@@ -12,8 +12,8 @@
    use Monolog\Logger;
    use Monolog\Handler\StreamHandler;
 
-   $log = new Logger("messageSender");
-   $log->pushHandler(new StreamHandler('../../logs/sendMessage.log', Logger::INFO));
+   $logger = new Logger("messageSender");
+   $logger->pushHandler(new StreamHandler('../../logs/chatSystem.log', Logger::INFO));
 
      //mesaj içeriği
    $sendingMessage = $_POST["message"];
@@ -31,7 +31,7 @@
         \"date\" : \"{$now}\" }";
 
         $sql = "SELECT messages,room_password FROM message_rooms WHERE id=$roomId";
-        $result = $connection->query($sql);
+        $result = $connection->query($sql) or die($logger->error(mysqli_error($connection)));
 
         $allMesages = "";
         $roomPassword = "";
@@ -45,10 +45,8 @@
          $decryptedAllMessages = $encrypter->decrypt($allMesages);
          $decryptedSendingMessages = substr($decryptedAllMessages,0,strlen($decryptedAllMessages)-1). "," . $jsonSendingMessage . "]";
 
-         $log->info("sending message is $decryptedAllMessages");
-
          $encrpyptedSendingMessage =  $encrypter->encrypt($decryptedSendingMessages);
 
          $sql = "UPDATE message_rooms SET message_rooms.messages = '$encrpyptedSendingMessage' WHERE id = $roomId";
-         $connection->query($sql);
+         $connection->query($sql) or die($logger->error(mysqli_error($connection)));
     }

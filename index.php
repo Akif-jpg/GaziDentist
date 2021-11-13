@@ -53,35 +53,39 @@
                     $post_status = $row['post_status'];
             ?>
                     <!-- First Blog Post -->
-                    <h2>
-                        <a href="post.php?p_id=<?php echo $post_id; ?>">
-                            <?php echo $post_title; ?> </a>
-                    </h2>
-                    <p class="lead"> by
-                        <a href="author_post.php?author=<?php echo $post_author; ?>">
-                            <?php echo $post_author; ?>  </a> <span>
-                            <?php //select interest based on comma and generet random classs
-                                    $tags = $post_tags;
-                                    $tags = explode(',',$tags);
-                                    foreach ($tags as $tag) {
-                                        $classes = array('primary','default','success','info','warning','danger','default','success','info','warning','danger','primary','default','success');
-                                        $class = array_rand($classes);
-                                        echo "<span class='label label-$classes[$class]'>$tag</span>";
-                                    }
-                            ?>
+                    <div style="justify-content:center;display:flex;">
+                        <div class="w3-show-inline-block">
+                            <h2>
+                                <a href="post.php?p_id=<?php echo $post_id; ?>">
+                                    <?php echo $post_title; ?> </a>
+                            </h2>
+                            <p class="lead"> by
+                                <a href="author_post.php?author=<?php echo $post_author; ?>">
+                                    <?php echo $post_author; ?>  </a> <span>
+                                    <?php //select interest based on comma and generet random classs
+                                            $tags = $post_tags;
+                                            $tags = explode(',',$tags);
+                                            foreach ($tags as $tag) {
+                                                $classes = array('primary','default','success','info','warning','danger','default','success','info','warning','danger','primary','default','success');
+                                                $class = array_rand($classes);
+                                                echo "<span class='label label-$classes[$class]'>$tag</span>";
+                                            }
+                                    ?>
 
-                            </span>
-                       
-                    </p>
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on
-                        <?php echo $post_date; ?>
-                    </p>
-                    <hr> <img class="img-responsive" src="images/post_pic/<?php echo $post_image; ?>" alt="">
-                    <hr>
-                    <p>
-                        <?php echo $post_content; ?>
-                    </p> <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    <hr>
+                                    </span>
+                            
+                            </p>
+                            <p><span class="glyphicon glyphicon-time"></span> Posted on
+                                <?php echo $post_date; ?>
+                            </p>
+                            <hr> <img class="img-responsive" src="images/post_pic/<?php echo $post_image; ?>" alt="">
+                            <hr>
+                            <p>
+                                <?php echo $post_content; ?>
+                            </p> <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            <hr>
+                        </div>
+                    </div>
                     <?php 
                         } 
                     }

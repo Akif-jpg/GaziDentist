@@ -187,9 +187,9 @@ function login_user($username, $password){
             exit;
         }else{
             if($db_user_role == 'admin'){
-                redirect("/admin");
+                redirect("/admin/index.php");
             } elseif($db_user_role == 'author'){
-                redirect("/authors");
+                redirect("/authors/index.php");
             }else{
                 redirect("/index.php");
             }
