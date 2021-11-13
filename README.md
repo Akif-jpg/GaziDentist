@@ -27,7 +27,8 @@
       ->Sitede çerezleri kabul ediyor musun etc... gibi şeyler için izin istenecek özellikle ilk login olduğunda.(ok)
         
 
-    Projenin açıklanması:
+Projenin açıklanması:
+
       Proje içersinde mysql veri tabanı kullanılmaktadır. gazident_blog.sql kullanılarak veriabanı kolayca import edilebilir.
       
       İncludes/db.php içerisinde veritabanı bağlantısıyla ilgili bilgiler bulunmaktadır. Örnek username, password...
