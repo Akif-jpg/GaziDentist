@@ -39,3 +39,5 @@
 [2021-11-13T11:45:20.625260+00:00] accept_friend_request.ERROR: INSERT INTO... FROM Akif TO Benan; You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 8 [] []
 [2021-11-13T11:48:02.158315+00:00] accept_friend_request.INFO: username teslim alındı [] []
 [2021-11-13T11:48:02.158829+00:00] accept_friend_request.INFO: SELECT msg_id FROM user_inbox                         WHERE              (msg_subject = "Arkadaşlık isteği")             AND             (msg_author = "Benan")              AND              (msg_sent="Akif") [] []
+[2021-11-15T12:21:16.933187+00:00] accept_friend_request.INFO: username teslim alındı [] []
+[2021-11-15T12:21:16.936455+00:00] accept_friend_request.INFO: SELECT msg_id FROM user_inbox                         WHERE              (msg_subject = "Arkadaşlık isteği")             AND             (msg_author = "BeroBaba")              AND              (msg_sent="Akif") [] []

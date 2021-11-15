@@ -53,19 +53,21 @@
                 ?>
                         <div style="justify-content:center;display:flex;">
                             <div class="w3-show-inline-block">
-                                <h2>                            
-                                    <?php echo $msg_subject; ?> 
-                                </h2>
-                                <p class="lead"> gönderen
-                                    <a href="/profile.php?user=<?php echo $msg_author; ?>">
-                                        <?php echo $msg_author; ?> 
-                                    </a>                         
-                                </p>
-                                <p><span class="glyphicon glyphicon-time"></span> gönderim tarihi:&nbsp; 
-                                    <?php echo $msg_date; ?>
-                                </p>                        
                                 <p>
-                                    <?php echo $msg_content; ?>
+                                    <h2 class="w3-show-inline-block">                            
+                                        <?php echo $msg_subject; ?> 
+                                    </h2>
+                                    <p class="lead w3-show-inline-block"> (gönderen
+                                        <a href="/profile.php?user=<?php echo $msg_author; ?>">
+                                            <?php echo $msg_author; ?> 
+                                        </a>)                         
+                                    </p>
+                                    <p><span class="glyphicon glyphicon-time"></span> gönderim tarihi:&nbsp; 
+                                        <?php echo $msg_date; ?>
+                                    </p>                  
+                                </p>
+                                <p>
+                                        <?php echo $msg_content; ?>
                                 </p>
                             </div>
                         </div>

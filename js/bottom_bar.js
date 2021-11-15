@@ -146,7 +146,7 @@ function approveConnetToRoom() {
     }
 }
 
-setInterval(approveConnetToRoom, 1000);
+setInterval(approveConnetToRoom, 100);
 
 $('#messageArea').scroll(function() {
     if (chatArea.scrollTop + 250 <= chatArea.scrollHeight) {

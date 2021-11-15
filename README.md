@@ -36,4 +36,14 @@ Projenin açıklanması:
       Admin klasörü içerisinde admin kontrol panel ve author klasörünün içerisinde yazar kontrol paneli bulunmaktadır.
       
       Eğer php ve mariadb veya mysql veritabanını indirmişseniz projeyi php -t <PROJECT_PATH> -S localhost:<PORT_NUMBER> diyerek başlatabilirsiniz.
+
+      Projede php-memcache kullanılmaya başlanılmıştır. Bunun için memcache kurulumunu yapmalısınız.
+
+Güncellemeler 2021 Kasım 15:
+      Daha hızlı mesajlaşma olması için mesajları şifreleme kaldırıldı ve mesajlaşmalar ram üzerine alındı.
+      Arkadaşları görüntüleyebileceğimiz subscribers/friends.php sayfası hazırlandı.
+      Mesajlaşma sırasında daha fazla request yapılması sağlandı.
+      info/aboutUs.php için giriş yapıldı ama devamı yazılacak.
+
+
       

@@ -1,8 +1,8 @@
 <?php
 //includes
-include_once "../../includes/db.php";
 include_once "../../vendor/autoload.php";
-
+include_once "../../includes/db.php";
+include_once "../../includes/memcache.php";
 global $connection;
 
         /*
@@ -48,21 +48,25 @@ global $connection;
             }
         }
 
-        if($auth){
-            //Kullanıcıdan gelen oda id içerisindeki mesajlaşma bilgilerini ve onları encrypt edecek olan password'u alıyoruz.
-            $logger->info("auth sonrası işlemler");
-            $sql = "SELECT messages,room_password FROM message_rooms WHERE id='$roomId'";
+        if($auth){      
+            $memMessages = $memcached->get("messages-$roomId");
+            $memMessagesStatus = $memcached->get("messages-$roomId-update");
+        if($memMessagesStatus != "false" || !isset($memMessages)){          
+            $sql = "SELECT messages FROM message_rooms WHERE id='$roomId'";
             $results = $connection->query($sql) or die($logger->error(mysqli_error($connection)));
             $messages = "";
             $roomPassword = "";
 
             while($row = $results->fetch_assoc()){
-                $messages = $row["messages"];
-                $roomPassword = $row["room_password"];
-            }
-            $encrypter = new \CodeZero\Encrypter\DefaultEncrypter($roomPassword);
-            $messages = $encrypter->decrypt($messages);
+                $messages = $row["messages"];               
+            }            
             echo $messages;
+            $memcached->set("messages-$roomId",$messages,1200);
+            $memcached->set("messages-$roomId-update","false",1200);
+        }else{
+            echo $memMessages;          
+        }
+                      
         }else{
             header("HTTP/1.1 403 Forbidden");
         }
