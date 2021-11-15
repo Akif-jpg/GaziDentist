@@ -1,0 +1,3 @@
+<?php
+    $memcached = new Memcached();
+    $memcached->addServer("127.0.0.1", 11211);

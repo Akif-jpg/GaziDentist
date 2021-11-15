@@ -1,5 +1,6 @@
 <?php 
    include_once "../../includes/db.php";  
+   include_once "../../includes/memcache.php";
    include_once "../../vendor/autoload.php"; 
 
     /*
@@ -36,17 +37,13 @@
         $allMesages = "";
         $roomPassword = "";
 
-        while($row = $result->fetch_assoc()){
-            $allMesages = $row["messages"];
-            $roomPassword = $row["room_password"];
+        while($row = $result->fetch_assoc()){            $allMesages = $row["messages"];
+           
          }
 
-         $encrypter = new \CodeZero\Encrypter\DefaultEncrypter($roomPassword);
-         $decryptedAllMessages = $encrypter->decrypt($allMesages);
-         $decryptedSendingMessages = substr($decryptedAllMessages,0,strlen($decryptedAllMessages)-1). "," . $jsonSendingMessage . "]";
+        $allMesages = substr($allMesages,0,strlen($allMesages)-1). "," . $jsonSendingMessage . "]";       
 
-         $encrpyptedSendingMessage =  $encrypter->encrypt($decryptedSendingMessages);
-
-         $sql = "UPDATE message_rooms SET message_rooms.messages = '$encrpyptedSendingMessage' WHERE id = $roomId";
-         $connection->query($sql) or die($logger->error(mysqli_error($connection)));
+         $sql = "UPDATE message_rooms SET message_rooms.messages = '$allMesages' WHERE id = $roomId";
+         $connection->query($sql) or die($logger->error(mysqli_error($connection)));    
+         $memcached->set("messages-$roomId-update","true",1200);     
     }

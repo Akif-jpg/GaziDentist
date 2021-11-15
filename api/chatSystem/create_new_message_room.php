@@ -20,20 +20,18 @@ global $connection;
 
 
     
-    //random string generated for key of message room
-    $factory = new RandomLib\Factory;
-    $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
-    $randomString = $generator->generateString(12, 'abcdefghijklmnoprsituvyz123456789');
-   
-    //generated encrypter for encrytion of messages
-    $encrypter = new \CodeZero\Encrypter\DefaultEncrypter($randomString);
     //get date of today
     $today = date("d/m/Y H:i:s");
     //message encrypted by encrypter
-    $message = $encrypter->encrypt('[{"sender":"Sistem",
+    $message = '[{"sender":"Sistem",
         "message":"Odanız başarılı bir şekilde oluşturulmuştur buradan mesajlaşabilirsiniz.",
         "date":'. '"' ."$today" .'"' . '
-    }]'); 
+    }]';
+
+    //Belki ileride mesajları encrpyt edebilirim.
+    $factory = new RandomLib\Factory;
+    $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
+    $randomString = $generator->generateString(12, 'abcdefghijklmnoprsituvyz123456789');
 
     //Session started
     session_start();
