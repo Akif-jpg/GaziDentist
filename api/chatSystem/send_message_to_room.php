@@ -2,6 +2,7 @@
    include_once "../../includes/db.php";  
    include_once "../../includes/memcache.php";
    include_once "../../vendor/autoload.php"; 
+   include_once "../../includes/consts.php";
 
     /*
     * Buradaki işlemler kullanıcı bir mesaj gönderdiği anda olacak olanları kapsar.
@@ -26,24 +27,41 @@
    $sender = $_SESSION["username"];
    $now = date("d/m/Y H:i:s");
 
-   if(isset($sender)&&isset($roomId)&&isset($sendingMessage)){
+   
+   if(isset($sender)//Eğer gönderen kişinin kim olduğu,
+   &&isset($roomId)//gönderilecek oda 
+   &&isset($sendingMessage)//ve gönderilen mesaj set edilmişse
+   &&in_array($roomId,explode(",",$_SESSION['connectedRooms'])))// ve gönderen kişinin bağlanma yetkisi varsa.
+   {
+        //Gönderilecek mesaj json formatına dönüştürülür.
         $jsonSendingMessage = "{\"sender\" : \"{$sender}\" ,
         \"message\" : \"{$sendingMessage}\",
         \"date\" : \"{$now}\" }";
-
-        $sql = "SELECT messages,room_password FROM message_rooms WHERE id=$roomId";
+      //sql veritabanından odanın şifresi alınır. Not: bu da ramde saklanabilirdi.
+        $sql = "SELECT room_password FROM message_rooms WHERE id=$roomId";
         $result = $connection->query($sql) or die($logger->error(mysqli_error($connection)));
-
-        $allMesages = "";
         $roomPassword = "";
-
-        while($row = $result->fetch_assoc()){            $allMesages = $row["messages"];
-           
-         }
-
-        $allMesages = substr($allMesages,0,strlen($allMesages)-1). "," . $jsonSendingMessage . "]";       
-
-         $sql = "UPDATE message_rooms SET message_rooms.messages = '$allMesages' WHERE id = $roomId";
-         $connection->query($sql) or die($logger->error(mysqli_error($connection)));    
-         $memcached->set("messages-$roomId-update","true",1200);     
+        while($row = $result->fetch_assoc()){  
+          $roomPassword = $row["room_password"];
+         
+       }
+      //O ana kadar ki olan mesajlaşmalar ramden alınır.
+        $allMesages = $memcached->get("messages-$roomId");        
+        $allMesagesArray = json_decode($allMesages);
+       //Silinecek olan mesajlaşma sayısı belirlenir
+        $willDelete = count($allMesagesArray) - MAX_CHAT_SIZE;
+       //Fazla olan mesajlar silinir.
+        $allMesagesArray = array_slice($allMesagesArray,$willDelete,count($allMesagesArray));
+        //Tüm mesajlar tekrardan stringe çevrilir.
+        $allMesages = json_encode($allMesagesArray);
+       
+        //Yeni mesaj eski mesajların üstüne eklenir.
+        $allMesages = substr($allMesages,0,strlen($allMesages)-1). "," . $jsonSendingMessage . "]";     
+        $memcached->set("messages-$roomId",$allMesages,1200);  
+        
+        //Mesajlar şifrelenir ve öyle veritabanında saklanır.. 
+        $encrypter = new \CodeZero\Encrypter\DefaultEncrypter($roomPassword);
+        $encrypter ->encrypt($allMesages);
+        $sql = "UPDATE message_rooms SET message_rooms.messages = '$allMesages' WHERE id = $roomId";
+        $connection->query($sql) or die($logger->error(mysqli_error($connection))); 
     }

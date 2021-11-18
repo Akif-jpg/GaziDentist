@@ -1,3 +1,4 @@
+<?php include_once "db.php"?>
 <div class="w3-bottom-right w3-padding-medium">
     <div class="w3-hover-amber w3-show-inline-block w3-padding-small">
         <a  title="İçerik Gönder" href="/content_editor/"><img src="/images/pencil.png" style="border-radius: 50%; height: 50px;"></a>
@@ -59,16 +60,19 @@
                 class="w3-btn-floating w3-red fa fa-close"></button>
             </div>  
             <div class="w3-padding-medium w3-display-topleft w3-show-inline-block">
-            <button onclick="document.getElementById('selectRoom').style.display='block';document.getElementById('createRoom').style.display='none'"
-            class="w3-btn-floating w3-red fa fa-arrow-left"></button>
-        </div>
+                <button onclick="document.getElementById('selectRoom').style.display='block';document.getElementById('createRoom').style.display='none'"
+                class="w3-btn-floating w3-red fa fa-arrow-left"></button>
+            </div>
             <center> <h4 id="headerRoom" style="color:red">Yeni Oda Oluştur</h4> </center>
             <div class="w3-padding-medium">
                 <div class="form-group">
                     <center>
                         <input class="w3-padding-medium" id="roomName" type="text" placeholder="Oda İsmi">  
                         <input class="w3-padding-medium" id="participations" type="text" placeholder="Davetliler" readonly> 
-                        <button width="64px"><i class="fa fa-address-book-o" ></i>Kişi Ekle</button>
+                        <button width="64px"
+                        onclick="document.getElementById('addPerson').style.display ='block';document.getElementById('createRoom').style.display = 'none';">
+                        <i class="fa fa-address-book-o" ></i>
+                        Kişi Ekle</button>
                     </center>                 
                 </div>
                 <div class="w3-padding-medium">
@@ -78,6 +82,45 @@
         </div>
     </div>
   </div>
+</div>
+
+<div id="addPerson" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content">
+        <div class="w3-container">
+            <div>
+                <div class="w3-padding-medium w3-display-topright w3-show-inline-block">
+                    <button onclick="document.getElementById('addPerson').style.display='none';"
+                        class="w3-btn-floating w3-red fa fa-close"></button>
+                </div> 
+                <div class="w3-padding-medium w3-display-topleft w3-show-inline-block">
+                    <button onclick="document.getElementById('createRoom').style.display='block';document.getElementById('addPerson').style.display='none'"
+                    class="w3-btn-floating w3-red fa fa-arrow-left"></button>                
+                </div>
+                <center> <h4 id="headerRoom" style="color:red">Yeni Kişi Ekle</h4>  </center>
+                <div id="friendList" class="w3-border-amber w3-border-2">
+                    <?php                         
+                        $username = $_SESSION['username'];
+                        $sql = "SELECT friend_ls FROM friends WHERE username=\"$username\"";
+                        $results = $connection->query($sql);                                               
+                        while($row = $results->fetch_assoc()){
+                            $friendLs = explode(",",$row["friend_ls"]);
+                            for($index = 1;$index<count($friendLs);$index++){                                 
+                                echo "<div class=\"w3-center roomDiv room\">
+                                    <span class=\"friend\">$friendLs[$index]</span>
+                                    <span style=\"font-size16px;\" onclick=\"addFriend('$friendLs[$index]')\">
+                                        <i class=\"w3-padding-left  w3-padding-right fa fa-plus\"></i>
+                                    </span>
+                                    <span style=\"font-size16px;\" onclick=\"removeFriend('$friendLs[$index]')\">
+                                        <i class=\"w3-padding-left w3-padding-right fa fa-minus\"></i>
+                                    </span>
+                                </div>";
+                            }
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

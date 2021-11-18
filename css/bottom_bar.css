@@ -1,52 +1,64 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
-
-#messageBox{
+#messageBox {
     position: fixed;
     bottom: 70px;
-    right: 10px;        
+    right: 10px;
     transition: 1s;
-    background-color: rgba(44, 129, 193,0.75); 
-    display: none;   
+    background-color: rgba(44, 129, 193, 0.75);
+    display: none;
 }
 
-#messageArea{
+#messageArea {
     width: 250px;
     height: 125px;
     font-size: 12px;
 }
 
-#selectRoom{
+#selectRoom {
     min-height: 350px;
 }
-#headerRoom{
+
+#headerRoom {
     font-family: 'Merriweather', serif;
 }
 
-#roomList{
+#roomList {
     max-height: 500px;
-    margin-bottom: 40px;        
+    margin-bottom: 40px;
     overflow-y: auto;
-    overflow-x: hidden;        
+    overflow-x: hidden;
 }
 
-#scrollBottom.button{
+#friendList {
+    max-height: 500px;
+    margin-bottom: 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#scrollBottom.button {
     text-align: center;
 }
 
-.room{
-    padding-right: 50px;        
+.room {
+    padding-right: 50px;
 }
 
-.room:hover{
+.friend {
+    padding-right: 50px;
+}
+
+.room:hover {
     cursor: pointer;
 }
 
-.roomDiv{
+.roomDiv {
     transition: 0.2s;
     font-size: 18px;
     width: 100%;
 }
-.roomDiv:hover{
+
+.roomDiv:hover {
     background-color: lightblue;
     font-size: 20px;
 }

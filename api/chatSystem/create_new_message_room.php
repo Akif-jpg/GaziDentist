@@ -22,16 +22,19 @@ global $connection;
     
     //get date of today
     $today = date("d/m/Y H:i:s");
-    //message encrypted by encrypter
-    $message = '[{"sender":"Sistem",
-        "message":"Odanız başarılı bir şekilde oluşturulmuştur buradan mesajlaşabilirsiniz.",
-        "date":'. '"' ."$today" .'"' . '
-    }]';
 
     //Belki ileride mesajları encrpyt edebilirim.
     $factory = new RandomLib\Factory;
     $generator = $factory->getGenerator(new SecurityLib\Strength(SecurityLib\Strength::MEDIUM));
-    $randomString = $generator->generateString(12, 'abcdefghijklmnoprsituvyz123456789');
+    $randomString = $generator->generateString(8, 'abcdefghijklmnoprsituvyz123456789');
+
+    //prepared message encrypter
+    $encrypter = new \CodeZero\Encrypter\DefaultEncrypter($randomString);
+    //message encrypted by encrypter
+    $message = $encrypter->encrypt('[{"sender":"Sistem",
+        "message":"Odanız başarılı bir şekilde oluşturulmuştur buradan mesajlaşabilirsiniz.",
+        "date":'. '"' ."$today" .'"' . '
+    }]'); 
 
     //Session started
     session_start();

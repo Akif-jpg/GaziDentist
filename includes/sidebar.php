@@ -1,5 +1,5 @@
 
-<div style="margin-bottom: 20%;">
+<div style="margin-bottom: 600px;">
     <div class="w3-sidenav w3-border-right w3-collapse w3-animate-left w3-animate-opacity" style="left: 0px;" id="mySideBar">    
         <div class="topRSideDiv">
             <button class="w3-btn-floating w3-hide-large w3-red fa fa-close" onclick="closeNav()"> </button>
@@ -114,7 +114,7 @@
                                     while($rowLastPosts = mysqli_fetch_assoc($lastPosts)){
                                         ?>
                                         <li>
-                                            <a class="w3-hover-cyan sofiaFont" href=<?php echo "post.php?p_id=".$rowLastPosts['post_id']?>>
+                                            <a class="w3-hover-cyan sofiaFont" href=<?php echo "/post.php?p_id=".$rowLastPosts['post_id']?>>
                                                 <?php echo $rowLastPosts['post_title']?>
                                             </a>
                                         </li>

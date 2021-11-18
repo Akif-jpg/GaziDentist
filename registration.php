@@ -77,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             </p>                           
 
                             <div class="formGroup">
-                                <input type="text" placeholder="Kullanıcı adı" name="username" required> 
+                                <input id="username" type="text" placeholder="Kullanıcı adı" name="username" required> 
                                 <input type="email" placeholder="email" name="email" required>                                                   
                             </div>
 
@@ -88,8 +88,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             </p>
 
                             <div class="formGroup">
-                                <input type="password" placeholder="Şifre" name="password" id="password" required> 
-                                <input type="password" placeholder="Şifrenizi onaylayın" id="confirm_password" required>                                                   
+                                <input id="password" type="password" placeholder="Şifre" name="password" id="password" required> 
+                                <input id="password" type="password" placeholder="Şifrenizi onaylayın" id="confirm_password" required>                                                   
                             </div>
 
                             <p>

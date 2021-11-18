@@ -45,7 +45,8 @@ session_start();
     <script src="/js-snackbar/js-snackbar.js"></script>
     <script>
         new SnackBar({
-            message: "Bu site çalışması için zorunlu olan birtakım çerezleri kullanmaktadır. Daha detaylı bilgi için gizlilik sözleşmesine bakınız.",
+            message: "Bu site çalışması için zorunlu olan birtakım çerezleri kullanmaktadır.\
+             Daha detaylı bilgi için gizlilik sözleşmesine bakınız.(Uygulama tamamen test aşamasındadır. Kayıt verileriniz sonra silinecektir ve pek ok şey düzgün çalışmayabilir.)",
             type: "info",
             status: "warning",
             icon: "warn",
