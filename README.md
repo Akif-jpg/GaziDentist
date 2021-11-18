@@ -44,6 +44,9 @@ Güncellemeler 2021 Kasım 15:
       Arkadaşları görüntüleyebileceğimiz subscribers/friends.php sayfası hazırlandı.
       Mesajlaşma sırasında daha fazla request yapılması sağlandı.
       info/aboutUs.php için giriş yapıldı ama devamı yazılacak.
+Güncellemeler 2021 Kasım 18:
+      Şifreleme daha optimize olacak şekilde geri getirildi.
+      Mesajlaşma odalarına kişi eklemeye giriş yapıldı.
 
 
       
