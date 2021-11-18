@@ -113,6 +113,7 @@ function connectToRoom(roomId) {
         url: apiUrl + "connect_message_room.php",
         data: { 'roomId': roomId },
         success: function(res) {
+            console.log(res);
             let messageList = JSON.parse(res);
             messageArea = document.getElementById("messageArea");
             messageArea.innerHTML = "";
@@ -126,6 +127,7 @@ function connectToRoom(roomId) {
         },
         error: function(res) {
             alert("Bağlantı başarısız oldu");
+            currentRoomId = -1;
         }
     });
 }
@@ -133,10 +135,11 @@ function connectToRoom(roomId) {
 function slideScrolltoBottom() {
     chatArea.scrollTop = chatArea.scrollHeight;
     mouseOverMessageArea = false;
+    document.getElementById("scrollBottom").style.display = "none";
 }
 
 
-function approveConnetToRoom() {
+function approveConnectToRoom() {
     if (connectable && currentRoomId > 0) {
         connectToRoom(currentRoomId);
 
@@ -146,18 +149,12 @@ function approveConnetToRoom() {
     }
 }
 
-setInterval(approveConnetToRoom, 100);
+setInterval(approveConnectToRoom, 1000);
 
 $('#messageArea').scroll(function() {
-    if (chatArea.scrollTop + 250 <= chatArea.scrollHeight) {
+    if (chatArea.scrollTop + 150 <= chatArea.scrollHeight) {
         document.getElementById("scrollBottom").style.display = "block";
         mouseOverMessageArea = true;
-    } else if (chatArea.scrollTop + 100 <= chatArea.scrollHeight) {
-        document.getElementById("scrollBottom").style.display = "none";
-        mouseOverMessageArea = false;
-
-    } else {
-        document.getElementById("scrollBottom").style.display = "none";
     }
 });
 
@@ -169,3 +166,14 @@ $('#messageInput').keypress(
         }
     }
 );
+
+var willAddFriends = "";
+
+function addFriend(friend) {
+    //Will add friend to willAddFriends string and it will push to participations
+}
+
+function removeFriend(friend) {
+    //Will remove friend to willAddFriends string and it will push to participations
+
+}
