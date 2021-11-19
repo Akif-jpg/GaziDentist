@@ -1,61 +1,56 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@500&display=swap');/*font-family: 'Gemunu Libre', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@500&display=swap');
 
-a.sofiaFont{
-    color: black;   
+/*font-family: 'Gemunu Libre', sans-serif;*/
+
+a.sofiaFont {
+    color: black;
 }
 
-.topLSideDiv{
+.topLSideDiv {
     position: fixed;
     top: 60px;
     left: 20px;
     display: inline-block;
 }
 
-.topRSideDiv{
+.topRSideDiv {
     position: absolute;
-    top: 0px;   
+    top: 0px;
     left: 245px;
     text-align: right;
     padding-top: 10px;
-    
 }
 
-
-.userPorfileImage{
+.userPorfileImage {
     border-radius: 50%;
     width: 150px;
+    height: 150px;
 }
 
-.boldHeader{
+.boldHeader {
     font-family: 'Bebas Neue', cursive;
 }
 
-#mySideBar{   
-    top: 55px;   
+#mySideBar {
+    top: 55px;
 }
 
-
-
 @media screen and (max-width: 991px) {
-    .topLSideDiv{
+    .topLSideDiv {
         top: 120px;
     }
-
-    #mySideBar{
-        top: 100px;        
+    #mySideBar {
+        top: 100px;
     }
 }
 
 @media screen and (max-width: 767px) {
-    .topLSideDiv{
+    .topLSideDiv {
         top: 60px;
     }
-
-    #mySideBar{
-
-        top: 55px;        
+    #mySideBar {
+        top: 55px;
     }
 }

@@ -61,7 +61,7 @@
         
         //Mesajlar şifrelenir ve öyle veritabanında saklanır.. 
         $encrypter = new \CodeZero\Encrypter\DefaultEncrypter($roomPassword);
-        $encrypter ->encrypt($allMesages);
+        $allMesages = $encrypter ->encrypt($allMesages);
         $sql = "UPDATE message_rooms SET message_rooms.messages = '$allMesages' WHERE id = $roomId";
         $connection->query($sql) or die($logger->error(mysqli_error($connection))); 
     }

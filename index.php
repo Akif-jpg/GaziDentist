@@ -60,7 +60,7 @@
                                     <?php echo $post_title; ?> </a>
                             </h2>
                             <p class="lead"> by
-                                <a href="author_post.php?author=<?php echo $post_author; ?>">
+                                <a href="profile.php?user=<?php echo $post_author; ?>">
                                     <?php echo $post_author; ?>  </a> <span>
                                     <?php //select interest based on comma and generet random classs
                                             $tags = $post_tags;

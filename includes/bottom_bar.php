@@ -105,15 +105,11 @@
                         while($row = $results->fetch_assoc()){
                             $friendLs = explode(",",$row["friend_ls"]);
                             for($index = 1;$index<count($friendLs);$index++){                                 
-                                echo "<div class=\"w3-center roomDiv room\">
-                                    <span class=\"friend\">$friendLs[$index]</span>
-                                    <span style=\"font-size16px;\" onclick=\"addFriend('$friendLs[$index]')\">
-                                        <i class=\"w3-padding-left  w3-padding-right fa fa-plus\"></i>
-                                    </span>
-                                    <span style=\"font-size16px;\" onclick=\"removeFriend('$friendLs[$index]')\">
-                                        <i class=\"w3-padding-left w3-padding-right fa fa-minus\"></i>
-                                    </span>
-                                </div>";
+                                echo "<div id=\"$friendLs[$index]-friend\" class=\"w3-center roomDiv room\">
+                                        <span class=\"friend\">$friendLs[$index]</span>
+                                        <span style=\"font-size16px;\" onclick=\"addFriend('$friendLs[$index]')\">
+                                            <i class=\"w3-padding-left  w3-padding-right fa fa-plus\"></i>
+                                    </div>";
                             }
                         }
                     ?>
