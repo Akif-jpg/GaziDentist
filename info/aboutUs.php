@@ -6,6 +6,7 @@
     <div class="container">
         <div class="row">
             <!-- Buraya siteyi anlattığım ve güncellemelerden bahsettiğim bir bölüm gelecek. -->
+            Hakkımızda
         </div>
     </div>
 
