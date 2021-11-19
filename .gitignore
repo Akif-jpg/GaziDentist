@@ -1,4 +1,2 @@
-logs/friendsSystem.log
-logs/chatSystem.log
-logs/general.log
+*.log
 images/*
