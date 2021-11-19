@@ -22,7 +22,6 @@ xhr.onload = function() {
     } else { // show the result  
         roomListDiv.innerHTML = "";
         let responseArray = JSON.parse(xhr.responseText);
-        console.log(responseArray);
         if (responseArray.length == 0) {
             roomListDiv.innerHTML = '<div class="w3-center">Hiçbir oda bulunamadı. Login olmayı veya oda oluşturmayı deneyin.</div>'
         } else {
@@ -68,7 +67,6 @@ function openCreateNewRoomModal() {
 function sendMessage() {
     //Buraya mesaj göndermeyle ilgili olacak script kodu gelecek.
     var messageContent = document.getElementById("messageInput").value;
-    console.log(messageContent);
     document.getElementById("messageInput").value = "";
     $.ajax({
         type: "POST",
@@ -93,6 +91,8 @@ function sendCreateRoom() {
             alert("Odanız başarıyla oluşturulmuştur.");
             xhr.open('GET', apiUrl + 'user_message_rooms.php');
             xhr.send();
+            document.getElementById("roomName").value = "";
+            document.getElementById("participations").value = "";
 
         }
     });
@@ -113,7 +113,6 @@ function connectToRoom(roomId) {
         url: apiUrl + "connect_message_room.php",
         data: { 'roomId': roomId },
         success: function(res) {
-            console.log(res);
             let messageList = JSON.parse(res);
             messageArea = document.getElementById("messageArea");
             messageArea.innerHTML = "";
@@ -124,6 +123,10 @@ function connectToRoom(roomId) {
                     messageList[i]["message"] + "&#13;&#10;";
             }
             currentRoomId = roomId;
+
+            if (!mouseOverMessageArea) {
+                chatArea.scrollTop = chatArea.scrollHeight;
+            }
         },
         error: function(res) {
             alert("Bağlantı başarısız oldu");
@@ -142,10 +145,6 @@ function slideScrolltoBottom() {
 function approveConnectToRoom() {
     if (connectable && currentRoomId > 0) {
         connectToRoom(currentRoomId);
-
-        if (!mouseOverMessageArea) {
-            chatArea.scrollTop = chatArea.scrollHeight;
-        }
     }
 }
 
@@ -167,13 +166,19 @@ $('#messageInput').keypress(
     }
 );
 
-var willAddFriends = "";
+var participantFriends = new Array();
 
 function addFriend(friend) {
     //Will add friend to willAddFriends string and it will push to participations
-}
-
-function removeFriend(friend) {
-    //Will remove friend to willAddFriends string and it will push to participations
-
+    console.log("istenen arkadaşın ismi: " + friend);
+    if (!participantFriends.includes(friend)) {
+        document.getElementById(friend + "-friend").getElementsByTagName("i")[0].className = "w3-padding-left  w3-padding-right fa fa-minus";
+        participantFriends.push(friend);
+        console.log("minus edildi" + participantFriends.toString());
+    } else {
+        document.getElementById(friend + "-friend").getElementsByTagName("i")[0].className = "w3-padding-left  w3-padding-right fa fa-plus";
+        participantFriends = participantFriends.filter(item => (item !== friend));
+        console.log("plus edildi" + participantFriends.toString());
+    }
+    document.getElementById("participations").value = participantFriends.toString();
 }

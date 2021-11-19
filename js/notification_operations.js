@@ -1,8 +1,14 @@
-const api = "/api/friendSystem/";
+const friendshipSystemApi = "/api/friendSystem/";
 
-const friendRequestURL = api + "send_friend_request.php";
-const acceptFriendURL = api + "accept_friend_request.php";
-const rejectFriendURL = api + "reject_friend_request.php";
+const friendRequestURL = friendshipSystemApi + "send_friend_request.php";
+const acceptFriendURL = friendshipSystemApi + "accept_friend_request.php";
+const rejectFriendURL = friendshipSystemApi + "reject_friend_request.php";
+
+const chatSystemApi = "/api/chatSystem/";
+
+const joinRoomApi = chatSystemApi + "joinRoom";
+const rejectRoomAppointmentApi = chatSystemApi + "rejectRoomAppointment";
+
 
 let params = new URLSearchParams(window.location.search);
 if (document.getElementById("friendStatus") != null) {

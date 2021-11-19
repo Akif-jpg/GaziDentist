@@ -1,4 +1,3 @@
-
 <div style="margin-bottom: 600px;">
     <div class="w3-sidenav w3-border-right w3-collapse w3-animate-left w3-animate-opacity" style="left: 0px;" id="mySideBar">    
         <div class="topRSideDiv">
@@ -118,30 +117,45 @@
                                                 <?php echo $rowLastPosts['post_title']?>
                                             </a>
                                         </li>
-                                        <?php
+                                <?php
                                     }
                                 ?>
                             </ul>
                         </div>
                     </div> 
                     <div class="w3-dropdown-click w3-display-container w3-padding-top">
-                        <button class="w3-btn-block w3-white w3-border-2 w3-border-red" onclick="">Takip Edilenler</button>
+                        <button class="w3-btn-block w3-white w3-border-2 w3-border-red" onclick="openFriendsP()">Arkadaşların Paylaşımları</button>
                         <div class="w3-dropdown-content w3-animate-bottom" id="subscription">
                             <ul class="w3-ul w3-center">
-                                <?php
-                                    $sql = "SELECT * FROM posts WHERE post_status = 'publish' ORDER BY post_id DESC LIMIT 5";
-                                    $lastPosts = $connection->query($sql);
+                                    <?php
+                                        $sql = "SELECT friend_ls FROM friends WHERE username=\"$username\"";
+                                        $results =  mysqli_query($connection,$sql);
+                                        $friends = "";
+                                        while($row = mysqli_fetch_assoc($results)){
+                                            $friends = $row['friend_ls'];
+                                        }
 
-                                    while($rowLastPosts = mysqli_fetch_assoc($lastPosts)){
-                                        ?>
-                                        <li>
-                                            <a class="w3-hover-red sofiaFont" href=<?php echo "post.php?p_id=".$rowLastPosts['post_id']?>>
-                                                <?php echo $rowLastPosts['post_title']?>
-                                            </a>
-                                        </li>
-                                        <?php
-                                    }
-                                ?>
+                                        $friendArray = explode(",",$friends);
+                                        $arrCount = count($friendArray);
+
+                                        $friendList = "";
+                                        for($index = 1;$index < $arrCount;$index++){
+                                            $friendList .= "post_author=\"$friendArray[$index]\" OR ";
+                                        }      
+                                        
+                                        $friendList = substr($friendList,0,strlen($friendList)-4);
+                                        $sql = "SELECT post_id,post_title FROM posts WHERE " . $friendList ;                                        
+                                        $posts = mysqli_query($connection,$sql) or die ($logger->error(mysqli_error($connection)));
+                                        while($rowFriendPost = mysqli_fetch_assoc($posts)){
+                                            ?>
+                                            <li>
+                                                <a class="w3-hover-cyan sofiaFont" href=<?php echo "/post.php?p_id=".$rowFriendPost['post_id']?>>
+                                                    <?php echo $rowFriendPost['post_title']?>
+                                                </a>
+                                            </li>
+                                            <?php
+                                        }
+                                    ?>
                             </ul>
                         </div>
                     </div>

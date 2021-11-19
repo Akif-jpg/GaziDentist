@@ -10,7 +10,7 @@
       
       ->Arkadaşlık isteği gönderiliyor artık isteğin görüntülenmesi(bildirimler kısmında) ve kabul edilmesi ile ilgili kısımlar kaldı.(ok)  
       
-      ->Sonrasında ise mesaj odasında bu kişileri kendi odalarımıza ekleyebilmek ve takip ettiğimiz arkadaşların postlarını görüntüleyebilmek var diyebilirim
+      ->Sonrasında ise mesaj odasında bu kişileri kendi odalarımıza ekleyebilmek ve takip ettiğimiz arkadaşların postlarını görüntüleyebilmek var diyebilirim(ok)
       
       ->Kişinin yazı yazma hakkını elinden alma yetkisi 
       
@@ -39,7 +39,10 @@ Projenin açıklanması:
 
       Projede php-memcache kullanılmaya başlanılmıştır. Bunun için memcache kurulumunu yapmalısınız.
 
-Güncellemeler 2021 Kasım 15:
+      Toplam depolanacak mesajlaşma sayısını includes/consts.php içerisinden değiştirebilirsiniz.
+
+      Profil resmi ve post resimlerinin maximum boyutlarını includes/consts.php içerisinden değiştirebilirsiniz.
+Güncellemeler 15 Kasım 2021:
       Daha hızlı mesajlaşma olması için mesajları şifreleme kaldırıldı ve mesajlaşmalar ram üzerine alındı.
       Arkadaşları görüntüleyebileceğimiz subscribers/friends.php sayfası hazırlandı.
       Mesajlaşma sırasında daha fazla request yapılması sağlandı.
@@ -47,6 +50,14 @@ Güncellemeler 2021 Kasım 15:
 Güncellemeler 2021 Kasım 18:
       Şifreleme daha optimize olacak şekilde geri getirildi.
       Mesajlaşma odalarına kişi eklemeye giriş yapıldı.
+Güncellemeler 19 Kasım 2021:
+      Kurduğumuz mesaj odalarına artık arakdaşımız olan kişileri görebiliyoruz.
+      Arkadaşların paylaşımları kısmında arkadaş olduğumuz kişilerin paylaşımlarını görebiliyoruz.
+      Bir post üzerinde gönderenin isminer bastığımız zaman kişinin profiline gidebiliyoruz.
+      Herkesin ortak katılımına açık olan bir genel oda oluşturuldu.
+      Yan barda resim bulunan kısım yuvarlak bir çerçeve içerisine alındı.
+      Authorların kendi profillerini düzenlerken resim eklemelerine düzenleme getirildi.
+      Post resmi eklemek istediğimizde artık maximum sınır 3MB ve yüklenebilecek dosya tipleri png jpg ve jpeg olarak düzenlendi
 
 
       

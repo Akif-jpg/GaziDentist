@@ -41,16 +41,17 @@ global $connection;
    
     if(isset($_SESSION['username'])){
         //get username
-        $getUsername = $_SESSION['username'];    
+        $username = $_SESSION['username']; 
+        $userId = $_SESSION['user_id'];   
         //get title and particiants from post
-          $roomTitle = $_POST['roomTitle'];
+        $roomTitle = $_POST['roomTitle'];
         if(isset($_POST['participants'])&&$_POST['participants'] != null && $_POST['participants'] != ""){
-            $roomParticipiants = $_POST['participants'];
+            $roomParticipiants = $username.",".$_POST['participants'];
         }else{
-            $roomParticipiants = $getUsername;
+            $roomParticipiants = $username;
         }
           //create a new room
-        $sql = "INSERT INTO message_rooms (room_title,room_participiants,room_password,room_owner_username,messages) VALUES ('$roomTitle','$roomParticipiants','$randomString','$getUsername','$message')";
+        $sql = "INSERT INTO message_rooms (room_title,room_participiants,room_password,room_owner_username,messages) VALUES ('$roomTitle','$roomParticipiants','$randomString','$username','$message')";
         $connection->query($sql) or die($logger->error(mysqli_error($connection)));
     
         $sql = "SELECT id FROM message_rooms WHERE room_password='$randomString' ORDER BY id DESC";
@@ -62,7 +63,7 @@ global $connection;
 
         $logger->info("mesaj odasının id bilgisi alındı.");
     
-        $sql = "SELECT user_message_rooms FROM users WHERE username='$getUsername'";
+        $sql = "SELECT user_message_rooms FROM users WHERE username='$username'";
         $results = $connection->query($sql) or die ($logger->error(mysqli_error($connection)));
         $otherIDS;
         while($row = $results->fetch_assoc()){
@@ -76,9 +77,15 @@ global $connection;
         }        
        
         //set room id to users.user_message_rooms
-        $sql = "UPDATE users SET users.user_message_rooms= '$allIds' WHERE username='$getUsername'";
-        $connection->query($sql) or die($logger->error(mysqli_error($connection)));
-    
+        
+
+        //now we will send to notification to participations for join to room
+        $now = date("Y-m-d H:i:s");//getting date of today
+        foreach(explode(",",$roomParticipiants) as $participiant){
+            $sql = "UPDATE users SET users.user_message_rooms= '$allIds' WHERE username='$participiant'";
+            $connection->query($sql) or die($logger->error("UPDATE users SET...".mysqli_error($connection)));
+            $logger->info($participiant);
+        }    
         $logger->info("------------------Operasyonlar Bitti----------------------");
     }else{
         $logger->info("login olmadığı için işlemler yapılmadı.");

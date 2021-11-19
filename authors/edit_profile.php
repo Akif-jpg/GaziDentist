@@ -52,9 +52,13 @@
                             $user_country     = escape($_POST['user_country']);                           
                             $user_number      = escape($_POST['user_number']);                                                                                  
 
-                            if($_FILES['image']['size']< MAX_IMAGE_SIZE&&
-                                (end(explode('.', $_FILES['image']['name'])) == "jpeg"||
-                                end(explode('.', $_FILES['image']['name'])) == "png")){
+                            $temp = explode(".", $_FILES["image"]["name"]);
+
+                            $allowedExts = array("png","jpeg","jpg");
+
+                            $extension = end($temp);
+
+                            if($_FILES['image']['size'] <= MAX_IMAGE_SIZE &&  in_array($extension, $allowedExts)){
 
                                 $user_image = $_FILES['image']['name'];
                                 $user_image_temp = $_FILES['image']['tmp_name'];                                

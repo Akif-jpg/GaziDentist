@@ -35,8 +35,13 @@
                         }else{
                             $post_status = $_POST['post_status'];
                         }
-                        
-                        if($_FILES['image']['side'] < 200*1024 ){
+                        $temp = explode(".", $_FILES["image"]["name"]);
+
+                        $allowedExts = array("png","jpeg","jpg");
+
+                        $extension = end($temp);
+
+                        if($_FILES['image']['size'] <= MAX_POST_IMAGE_SIZE &&  in_array($extension, $allowedExts)){
                             $post_image = $_FILES['image']['name'];
                             $post_image_temp = $_FILES['image']['tmp_name'];
                             move_uploaded_file($post_image_temp, "../images/post_pic/$post_image");

@@ -104,7 +104,6 @@ function dateSave(){
 */
 function register_user($username, $firstname, $lastname, $sex, $email, $password){
     global $connection;
-
         $username = mysqli_real_escape_string($connection, $username);
         $email = mysqli_real_escape_string($connection, $email);
         $password = mysqli_real_escape_string($connection, $password);
@@ -117,6 +116,8 @@ function register_user($username, $firstname, $lastname, $sex, $email, $password
         $query = "INSERT INTO friends (username) VALUES ('{$username}')";
         $registration_user_query = mysqli_query($connection, $query);
         confirmQuery($registration_user_query);
+        $query = "UPDATE message_rooms SET room_participiants=CONCAT(room_participiants,\",$username\") WHERE id=1;";
+        confirmQuery(mysqli_query($connection,$query));
 
 }
 

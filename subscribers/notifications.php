@@ -94,7 +94,7 @@
         </div>
     </div>
 <!-- script sources -->
-<script src="/js/friendship_operations.js"></script>
+<script src="/js/notification_operations.js"></script>
 
 <?php include_once "../includes/sidebar.php"?>
 <?php include_once "../includes/footer.php"?>
