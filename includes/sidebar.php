@@ -1,8 +1,9 @@
 <div style="margin-bottom: 600px;">
-    <div class="w3-sidenav w3-border-right w3-collapse w3-animate-left w3-animate-opacity" style="left: 0px;" id="mySideBar">    
+    <div class="w3-sidenav w3-border-right w3-collapse w3-animate-left w3-animate-opacity" style="left: 0px;"
+        id="mySideBar">
         <div class="topRSideDiv">
             <button class="w3-btn-floating w3-hide-large w3-red fa fa-close" onclick="closeNav()"> </button>
-        </div>   
+        </div>
         <div class="w3-container">
             <div class="w3-row w3-padding-medium">
                 <div class="w3-tag w3-white w3-padding-xxlarge">
@@ -57,7 +58,7 @@
                         <p><?php echo $firstname.' '.$lastname?></p>
                         <div class="w3-dropdown-hover">
                             <button class="w3-btn-block">
-                                <h4 class="boldHeader">PROFİL</h4>                        
+                                <h4 class="boldHeader">PROFİL</h4>
                             </button>
                             <div class="w3-dropdown-content w3-bar-block w3-border">
                                 <a href="/subscribers/user_profile.php" class="w3-bar-item">Profile Git</a>
@@ -71,7 +72,8 @@
 
                 <div class="w3-container">
                     <div class="w3-dropdown-click w3-display-container w3-padding-top">
-                        <button class="w3-btn-block w3-white w3-border-2 w3-border-yellow" onclick="openCat()">Kategoriler</button>
+                        <button class="w3-btn-block w3-white w3-border-2 w3-border-red"
+                            onclick="openCat()">Kategoriler</button>
                         <div class="w3-dropdown-content w3-animate-bottom" id="catList">
                             <ul class="w3-ul w3-center">
                                 <?php
@@ -91,19 +93,21 @@
 
                                     foreach($catArray as $value){
                                         ?>
-                                        <li>
-                                            <a class="w3-hover-amber sofiaFont" href="<?php echo 'category.php?category='.$value['catId']?>">
-                                                <?php echo $value["catTitle"]?>
-                                            </a>
-                                        </li>
-                                        <?php
+                                <li>
+                                    <a class="w3-hover-red sofiaFont"
+                                        href="<?php echo 'category.php?category='.$value['catId']?>">
+                                        <?php echo $value["catTitle"]?>
+                                    </a>
+                                </li>
+                                <?php
                                     }
                                 ?>
                             </ul>
                         </div>
-                    </div>   
+                    </div>
                     <div class="w3-dropdown-click w3-display-container w3-padding-top">
-                        <button class="w3-btn-block w3-white w3-border-2 w3-border-cyan" onclick="openLastP()">Son Paylaşımlar</button>
+                        <button class="w3-btn-block w3-white w3-border-2 w3-border-cyan" onclick="openLastP()">Son
+                            Paylaşımlar</button>
                         <div class="w3-dropdown-content w3-animate-bottom" id="lastPosts">
                             <ul class="w3-ul w3-center">
                                 <?php
@@ -112,28 +116,32 @@
 
                                     while($rowLastPosts = mysqli_fetch_assoc($lastPosts)){
                                         ?>
-                                        <li>
-                                            <a class="w3-hover-cyan sofiaFont" href=<?php echo "/post.php?p_id=".$rowLastPosts['post_id']?>>
-                                                <?php echo $rowLastPosts['post_title']?>
-                                            </a>
-                                        </li>
+                                <li>
+                                    <a class="w3-hover-cyan sofiaFont"
+                                        href=<?php echo "/post.php?p_id=".$rowLastPosts['post_id']?>>
+                                        <?php echo $rowLastPosts['post_title']?>
+                                    </a>
+                                </li>
                                 <?php
                                     }
                                 ?>
                             </ul>
                         </div>
-                    </div> 
+                    </div>
                     <div class="w3-dropdown-click w3-display-container w3-padding-top">
-                        <button class="w3-btn-block w3-white w3-border-2 w3-border-red" onclick="openFriendsP()">Arkadaşların Paylaşımları</button>
+                        <button class="w3-btn-block w3-white w3-border-2 w3-border-green"
+                            onclick="openFriendsP()">Arkadaşların Paylaşımları</button>
                         <div class="w3-dropdown-content w3-animate-bottom" id="subscription">
                             <ul class="w3-ul w3-center">
-                                    <?php
+                                <?php
                                         $sql = "SELECT friend_ls FROM friends WHERE username=\"$username\"";
                                         $results =  mysqli_query($connection,$sql);
                                         $friends = "";
                                         while($row = mysqli_fetch_assoc($results)){
                                             $friends = $row['friend_ls'];
                                         }
+
+                                        if(!empty($friends)&&isset($friends)&&strlen($friends)>6){
 
                                         $friendArray = explode(",",$friends);
                                         $arrCount = count($friendArray);
@@ -144,27 +152,62 @@
                                         }      
                                         
                                         $friendList = substr($friendList,0,strlen($friendList)-4);
-                                        $sql = "SELECT post_id,post_title FROM posts WHERE " . $friendList ;                                        
+                                        $sql = "SELECT post_id,post_title FROM posts WHERE " 
+                                                ." post_status=\"publish\" AND "
+                                                . $friendList                                                 
+                                                ."ORDER BY post_id DESC LIMIT 10;";                                        
                                         $posts = mysqli_query($connection,$sql) or die ($logger->error(mysqli_error($connection)));
                                         while($rowFriendPost = mysqli_fetch_assoc($posts)){
                                             ?>
-                                            <li>
-                                                <a class="w3-hover-cyan sofiaFont" href=<?php echo "/post.php?p_id=".$rowFriendPost['post_id']?>>
-                                                    <?php echo $rowFriendPost['post_title']?>
-                                                </a>
-                                            </li>
-                                            <?php
+                                <li>
+                                    <a class="w3-hover-green sofiaFont"
+                                        href=<?php echo "/post.php?p_id=".$rowFriendPost['post_id']?>>
+                                        <?php echo $rowFriendPost['post_title']?>
+                                    </a>
+                                </li>
+                                <?php
                                         }
+                                    }
                                     ?>
                             </ul>
                         </div>
                     </div>
+                    <div class="w3-dropdown-click w3-display-container w3-padding-top">
+                        <button class="w3-btn-block w3-white w3-border-2 w3-border-yellow" onclick="openOwnerP()">Benim
+                            Paylaşımlarım</button>
+                        <div class="w3-dropdown-content w3-animate-bottom" id="myPosts">
+                            <ul class="w3-ul w3-center">
+                                <li>
+                                    <a class="w3-hover-yellow sofiaFont"
+                                        href="/author_post.php?author=<?php echo $username?>">
+                                        Tüm Paylaşımlarımı Aç
+                                    </a>
+                                </li>
+                                <?php
+                                $sql = "SELECT post_id,post_title FROM posts WHERE post_author = \"$username\" ORDER BY post_id DESC LIMIT 8";
+                                $ownPosts = $connection->query($sql);
+                                while($rowOwnPost = $ownPosts->fetch_assoc()){
+                                    ?>
+                                <li>
+                                    <a class="w3-hover-yellow sofiaFont"
+                                        href=<?php echo "/post.php?p_id=".$rowOwnPost['post_id']?>>
+                                        <?php echo $rowOwnPost['post_title']?>
+                                    </a>
+                                </li>
+                                <?php
+                                }
+
+                            ?>
+                            </ul>
+                        </div>
+                    </div>
+
                     <img height="100px">
                 </div>
                 <!-- Beğeni sistemi gelince en çok beğenilenler de eklenecek-->
-            </div>          
-        </div>  
-   </div>  
+            </div>
+        </div>
+    </div>
     <div class="topLSideDiv">
         <button class="w3-btn-block" onclick="openNav()">
             &#9776;

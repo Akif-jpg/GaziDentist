@@ -8,8 +8,8 @@
 <div class="container">
     <div class="row">
         <!-- Blog Entries Column -->
-         <!-- Blog Sidebar Widgets Column -->        
-         <!--İçeriklerin gösterimini yeniden ayarlamam gerekecek.-->     
+        <!-- Blog Sidebar Widgets Column -->
+        <!--İçeriklerin gösterimini yeniden ayarlamam gerekecek.-->
         <div class="col-md-10">
             <?php
                 $per_page = 5;
@@ -40,7 +40,7 @@
                 }
                 else {
                 $count = ceil($count / 5);
-                $query = "SELECT * FROM posts ORDER BY post_id DESC  LIMIT $page_1,$per_page";
+                $query = "SELECT * FROM posts WHERE post_status=\"publish\" OR post_author='{$_SESSION['username']}' ORDER BY post_id DESC  LIMIT $page_1,$per_page";
                 $select_all_posts_query = mysqli_query($connection,$query);
                 while($row = mysqli_fetch_assoc($select_all_posts_query)){
                     $post_id = $row['post_id'];
@@ -52,17 +52,15 @@
                     $post_content = substr($row['post_content'],0,100);
                     $post_status = $row['post_status'];
             ?>
-                    <!-- First Blog Post -->
-                    <div style="justify-content:center;display:flex;">
-                        <div class="w3-show-inline-block">
-                            <h2>
-                                <a href="post.php?p_id=<?php echo $post_id; ?>">
-                                    <?php echo $post_title; ?> </a>
-                            </h2>
-                            <p class="lead"> by
-                                <a href="profile.php?user=<?php echo $post_author; ?>">
-                                    <?php echo $post_author; ?>  </a> <span>
-                                    <?php //select interest based on comma and generet random classs
+            <!-- First Blog Post -->
+            <h2>
+                <a href="post.php?p_id=<?php echo $post_id; ?>">
+                    <?php echo $post_title; ?> </a>
+            </h2>
+            <p class="lead"> by
+                <a href="profile.php?user=<?php echo $post_author; ?>">
+                    <?php echo $post_author; ?> </a> <span>
+                    <?php //select interest based on comma and generet random classs
                                             $tags = $post_tags;
                                             $tags = explode(',',$tags);
                                             foreach ($tags as $tag) {
@@ -72,28 +70,28 @@
                                             }
                                     ?>
 
-                                    </span>
-                            
-                            </p>
-                            <p><span class="glyphicon glyphicon-time"></span> Posted on
-                                <?php echo $post_date; ?>
-                            </p>
-                            <hr> <img class="img-responsive" src="images/post_pic/<?php echo $post_image; ?>" alt="">
-                            <hr>
-                            <p>
-                                <?php echo $post_content; ?>
-                            </p> <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                            <hr>
-                        </div>
-                    </div>
-                    <?php 
+                </span>
+
+            </p>
+            <p><span class="glyphicon glyphicon-time"></span> paylaşım tarihi:&nbsp;
+                <?php echo $post_date; ?>
+            </p>
+            <hr> <img class="img-responsive" src="images/post_pic/<?php echo $post_image; ?>" alt="">
+            <hr>
+            <p>
+                <?php echo $post_content; ?>
+            </p> <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Devamını oku <span
+                    class="glyphicon glyphicon-chevron-right"></span></a>
+            <hr>
+
+            <?php 
                         } 
                     }
                       ?>
-                    <!-- Pager -->
-                    <center>
-                        <ul class="pagination pagination-lg">
-                            <?php
+            <!-- Pager -->
+            <center>
+                <ul class="pagination pagination-lg">
+                    <?php
                     for($i = 1; $i <= $count; $i++){
                         if($i == $page){
                             echo "<li class='active'><a href='index.php?page={$i}'>{$i}</a></li>";
@@ -102,16 +100,14 @@
                         }
                     }
                     ?>
-                        </ul>
-                    </center>
-        </div>       
+                </ul>
+            </center>
+        </div>
     </div>
     <!-- /.row -->
 </div>
-    <?php include "includes/bottom_bar.php"?>
-    <?php include "includes/sidebar.php"; ?>      
-    <hr>
-    <!-- Including Footer PHP -->
-    <?php include "includes/footer.php"; ?>
-
-   
+<?php include "includes/bottom_bar.php"?>
+<?php include "includes/sidebar.php"; ?>
+<hr>
+<!-- Including Footer PHP -->
+<?php include "includes/footer.php"; ?>

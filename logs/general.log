@@ -1,1 +1,7 @@
+<<<<<<< Updated upstream
 
+=======
+[2021-11-10T20:27:32.155948+00:00] user_profile.ERROR: Incorrect date value: '' for column `gazident_blog`.`users`.`user_birthday` at row 1 [] []
+[2021-11-21T11:58:01.413241+00:00] user_profile.ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 [] []
+[2021-11-21T11:58:08.505479+00:00] user_profile.ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1 [] []
+>>>>>>> Stashed changes

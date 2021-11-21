@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.1.1-2.fc35
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Nov 10, 2021 at 01:12 AM
--- Server version: 10.3.31-MariaDB-0ubuntu0.20.04.1
--- PHP Version: 7.4.3
+-- Host: localhost
+-- Generation Time: Nov 21, 2021 at 08:55 PM
+-- Server version: 10.5.12-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,17 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `cat_id` int(11) NOT NULL,
-  `cat_title` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `cat_image` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL DEFAULT 'no_category.png'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  `cat_title` varchar(255) NOT NULL,
+  `cat_image` varchar(255) NOT NULL DEFAULT 'no_category.png'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`cat_id`, `cat_title`, `cat_image`) VALUES
-(17, 'Diş Hekimliği', 'no_category.png'),
-(18, 'Endodonti', 'no_category.png');
 
 -- --------------------------------------------------------
 
@@ -51,14 +47,19 @@ INSERT INTO `categories` (`cat_id`, `cat_title`, `cat_image`) VALUES
 CREATE TABLE `comments` (
   `comment_id` int(3) NOT NULL,
   `comment_post_id` int(3) NOT NULL,
-  `comment_author` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `comment_email` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `comment_content` mediumtext COLLATE utf8mb4_turkish_ci NOT NULL,
-  `comment_reply` mediumtext COLLATE utf8mb4_turkish_ci NOT NULL,
-  `comment_reply_date` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `comment_status` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `comment_date` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  `comment_author` varchar(255) NOT NULL,
+  `comment_email` varchar(255) NOT NULL,
+  `comment_content` longtext NOT NULL,
+  `comment_reply` varchar(500) DEFAULT NULL,
+  `comment_reply_date` varchar(50) DEFAULT NULL,
+  `comment_status` varchar(255) NOT NULL,
+  `comment_date` varchar(50) NOT NULL,
+  `author_type` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comments`
+--
 
 -- --------------------------------------------------------
 
@@ -68,11 +69,11 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `friends` (
   `id` int(11) NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `friend_ls` varchar(1000) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `friend_request` varchar(1000) COLLATE utf8mb4_turkish_ci DEFAULT 'System',
-  `received_request` varchar(1000) COLLATE utf8mb4_turkish_ci DEFAULT 'System'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  `username` varchar(50) DEFAULT NULL,
+  `friend_ls` varchar(10000) DEFAULT 'System',
+  `friend_request` varchar(1000) DEFAULT 'System',
+  `received_request` varchar(10000) DEFAULT 'System'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `friends`
@@ -87,21 +88,17 @@ CREATE TABLE `friends` (
 
 CREATE TABLE `inbox` (
   `msg_id` int(10) NOT NULL,
-  `msg_status` varchar(10) COLLATE utf8mb4_turkish_ci NOT NULL DEFAULT 'Panding',
-  `msg_date` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `msg_author` varchar(60) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `msg_subject` varchar(70) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `author_email` varchar(70) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `msg_content` mediumtext COLLATE utf8mb4_turkish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  `msg_status` varchar(10) NOT NULL DEFAULT 'Panding',
+  `msg_date` varchar(50) NOT NULL,
+  `msg_author` varchar(60) NOT NULL,
+  `msg_subject` varchar(70) NOT NULL,
+  `author_email` varchar(70) NOT NULL,
+  `msg_content` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `inbox`
 --
-
-INSERT INTO `inbox` (`msg_id`, `msg_status`, `msg_date`, `msg_author`, `msg_subject`, `author_email`, `msg_content`) VALUES
-(18, 'replied', '2021-09-21 01:16:28 AM', 'Deneme', 'Deneme', 'akifesadi193@gmail.com', 'Deneme amaÃ§lÄ± atÄ±lmÄ±ÅŸtÄ±r'),
-(19, 'replied', '2021-10-16 11:43:27 PM', 'Da', 'BaÅŸarÄ±lar', 'husoerdog@yandex.com', 'Sitenizi Ã§ok beÄŸendim, baÅŸarÄ±larÄ±nÄ±zÄ±n devamÄ±nÄ± dilerim');
 
 -- --------------------------------------------------------
 
@@ -111,12 +108,12 @@ INSERT INTO `inbox` (`msg_id`, `msg_status`, `msg_date`, `msg_author`, `msg_subj
 
 CREATE TABLE `message_rooms` (
   `id` int(11) NOT NULL,
-  `room_title` varchar(200) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `room_participiants` varchar(1000) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `room_password` varchar(1000) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `room_owner_username` varchar(50) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `messages` longtext COLLATE utf8mb4_turkish_ci DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  `room_title` varchar(200) DEFAULT NULL,
+  `room_participiants` longtext DEFAULT NULL,
+  `room_password` varchar(10) DEFAULT NULL,
+  `room_owner_username` varchar(50) DEFAULT NULL,
+  `messages` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `message_rooms`
@@ -130,10 +127,10 @@ CREATE TABLE `message_rooms` (
 
 CREATE TABLE `online_users` (
   `id` int(3) NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `session` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `session` varchar(255) NOT NULL,
   `time` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -144,16 +141,16 @@ CREATE TABLE `online_users` (
 CREATE TABLE `posts` (
   `post_id` int(3) NOT NULL,
   `post_category_id` int(3) NOT NULL,
-  `post_title` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `post_author` varchar(55) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `post_date` varchar(70) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `post_image` mediumtext COLLATE utf8mb4_turkish_ci NOT NULL,
-  `post_content` mediumtext COLLATE utf8mb4_turkish_ci NOT NULL,
-  `post_tags` mediumtext COLLATE utf8mb4_turkish_ci NOT NULL,
+  `post_title` varchar(255) NOT NULL,
+  `post_author` varchar(55) NOT NULL,
+  `post_date` varchar(70) NOT NULL,
+  `post_image` mediumtext NOT NULL,
+  `post_content` mediumtext NOT NULL,
+  `post_tags` mediumtext NOT NULL,
   `post_comment_count` int(3) NOT NULL,
-  `post_status` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL DEFAULT 'draft',
+  `post_status` varchar(255) NOT NULL DEFAULT 'draft',
   `post_views_count` int(6) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `posts`
@@ -168,12 +165,12 @@ CREATE TABLE `posts` (
 
 CREATE TABLE `settings` (
   `id` int(3) NOT NULL,
-  `css` varchar(30) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `admin_access` varchar(30) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `site_status` varchar(30) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `url` varchar(30) COLLATE utf8mb4_turkish_ci NOT NULL,
+  `css` varchar(30) NOT NULL,
+  `admin_access` varchar(30) NOT NULL,
+  `site_status` varchar(30) NOT NULL,
+  `url` varchar(30) NOT NULL,
   `admin_id` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `settings`
@@ -190,29 +187,30 @@ INSERT INTO `settings` (`id`, `css`, `admin_access`, `site_status`, `url`, `admi
 
 CREATE TABLE `users` (
   `user_id` int(4) NOT NULL,
-  `username` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `user_firstname` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `user_lastname` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `user_sex` varchar(10) COLLATE utf8mb4_turkish_ci NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `user_firstname` varchar(255) NOT NULL,
+  `user_lastname` varchar(255) NOT NULL,
+  `user_sex` varchar(10) NOT NULL,
   `user_birthday` date NOT NULL,
-  `user_city` varchar(20) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `user_country` varchar(20) COLLATE utf8mb4_turkish_ci DEFAULT 'Türkiye',
-  `user_number` varchar(20) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `user_lastlogin` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `user_reg` varchar(30) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `user_email` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `user_password` varchar(100) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `user_image` varchar(250) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `user_role` varchar(20) COLLATE utf8mb4_turkish_ci NOT NULL,
+  `user_city` varchar(20) DEFAULT NULL,
+  `user_country` varchar(20) DEFAULT 'Türkiye',
+  `user_number` varchar(20) DEFAULT NULL,
+  `user_lastlogin` varchar(50) NOT NULL,
+  `user_reg` varchar(30) NOT NULL,
+  `user_email` varchar(50) NOT NULL,
+  `user_password` varchar(100) NOT NULL,
+  `user_image` varchar(250) DEFAULT NULL,
+  `user_role` varchar(20) NOT NULL,
   `user_likes` int(10) NOT NULL DEFAULT 0,
-  `user_interests` varchar(20) COLLATE utf8mb4_turkish_ci DEFAULT 'Diş Hekimliği',
-  `user_status` varchar(250) COLLATE utf8mb4_turkish_ci DEFAULT 'like good',
-  `user_message_rooms` varchar(200) COLLATE utf8mb4_turkish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  `user_interests` varchar(20) DEFAULT 'Diş Hekimliği',
+  `user_status` varchar(250) DEFAULT 'like good',
+  `user_message_rooms` varchar(20) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
+
 
 -- --------------------------------------------------------
 
@@ -221,15 +219,15 @@ CREATE TABLE `users` (
 --
 
 CREATE TABLE `user_inbox` (
-  `msg_id` int(2) NOT NULL,
-  `msg_sent` varchar(255) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
-  `msg_author_id` int(3) NOT NULL,
-  `msg_author` varchar(60) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `msg_subject` varchar(70) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `msg_content` mediumtext COLLATE utf8mb4_turkish_ci NOT NULL,
-  `msg_date` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `msg_reply_status` varchar(10) COLLATE utf8mb4_turkish_ci NOT NULL DEFAULT 'Unreplied'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  `msg_id` int(11) NOT NULL,
+  `msg_sent` varchar(255) DEFAULT NULL,
+  `msg_author_id` int(11) NOT NULL,
+  `msg_author` varchar(60) NOT NULL,
+  `msg_subject` varchar(70) NOT NULL,
+  `msg_content` mediumtext NOT NULL,
+  `msg_date` varchar(50) NOT NULL,
+  `msg_reply_status` varchar(10) NOT NULL DEFAULT 'Unreplied'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user_inbox`
@@ -308,19 +306,19 @@ ALTER TABLE `user_inbox`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `comment_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `friends`
 --
 ALTER TABLE `friends`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `inbox`
@@ -332,7 +330,7 @@ ALTER TABLE `inbox`
 -- AUTO_INCREMENT for table `message_rooms`
 --
 ALTER TABLE `message_rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `online_users`
@@ -344,7 +342,7 @@ ALTER TABLE `online_users`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `post_id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -356,13 +354,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `user_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `user_inbox`
 --
 ALTER TABLE `user_inbox`
-  MODIFY `msg_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

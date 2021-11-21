@@ -24,7 +24,7 @@ while($row = mysqli_fetch_assoc($select_post_by_id)){
     if(isset($_POST['update_post'])){
         $post_title = $_POST['post_title'];
         $post_category_id = $_POST['post_category'];
-        $post_author = $s_username;
+        $post_author = $_POST['post_author'];
         $post_status = $_POST['post_status'];
 
         $post_image = $_FILES['image']['name'];
@@ -97,9 +97,9 @@ while($row = mysqli_fetch_assoc($select_post_by_id)){
                         </select>
                     </td>
                     <td>
-                        <select class="form-control" name="post_author" id="disabledInput" disabled>
-                            <option>
-                                <?php echo $s_username; ?>
+                        <select class="form-control" name="post_author">
+                            <option value="<?php echo $post_author; ?>">
+                                <?php echo $post_author; ?>
                             </option>
                         </select>
                     </td>

@@ -30,7 +30,7 @@
 
 
             ?>
-                <?php
+            <?php
             if(isset($_GET['author'])){
                 $the_post_author = $_GET['author'];
             } else {
@@ -55,27 +55,27 @@
                 $post_content = substr($row['post_content'],0,100);
 
             ?>
-                    <!-- First Blog Post -->
-                    <h2>
-                        <a href="post.php?p_id=<?php echo $post_id; ?>">
-                            <?php echo $post_title; ?> </a>
-                    </h2>
+            <!-- First Blog Post -->
+            <h2>
+                <a href="post.php?p_id=<?php echo $post_id; ?>">
+                    <?php echo $post_title; ?> </a>
+            </h2>
 
-                    <p><span class="glyphicon glyphicon-time"></span> Posted on
-                        <?php echo $post_date; ?>
-                    </p>
-                    <hr>
-                    <img class="img-responsive" src="images/post_pic/<?php echo $post_image; ?>" alt="">
-                    <hr>
-                    <p>
-                        <?php echo $post_content; ?>
-                    </p>
-                    <hr>
-                    <?php } ?>
-                    <!-- Pager -->
-                    <center>
-                        <ul class="pagination pagination-lg">
-                            <?php
+            <p><span class="glyphicon glyphicon-time"></span> paylaşım tarihi:&nbsp;
+                <?php echo $post_date; ?>
+            </p>
+            <hr>
+            <img class="img-responsive" src="images/post_pic/<?php echo $post_image; ?>" alt="">
+            <hr>
+            <p>
+                <?php echo $post_content; ?>
+            </p>
+            <hr>
+            <?php } ?>
+            <!-- Pager -->
+            <center>
+                <ul class="pagination pagination-lg">
+                    <?php
                     for($i = 1; $i <= $count; $i++){
                         if($i == $page){
                             echo "<li class='active'><a href='author_post.php?page={$i}'>{$i}</a></li>";
@@ -85,8 +85,8 @@
 
                     }
                     ?>
-                        </ul>
-                    </center>
+                </ul>
+            </center>
 
         </div>
 

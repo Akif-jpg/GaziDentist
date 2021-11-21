@@ -3,6 +3,13 @@
     include_once "../includes/header.php";
     include_once "../includes/navigation.php";
     include_once "../includes/db.php";
+
+    if(isset($_SESSION['username'])){
+        $username = $_SESSION['username'];
+    }else{
+        setcookie("rdrctPath","subscribers/friends.php",time()+60*3,"/");
+        header("location: /login.php");
+    }
    
     session_start();
     $username = $_SESSION['username'];

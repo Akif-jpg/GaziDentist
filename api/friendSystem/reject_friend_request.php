@@ -10,7 +10,7 @@
     use \Monolog\Handler\StreamHandler;
 
     $logger = new Logger('accept_friend_request');
-    $logger->pushHandler(new StreamHandler('../../logs/frinedSystem'));
+    $logger->pushHandler(new StreamHandler('../../logs/frinedSystem.log'));
     
     $requestedUser = $_POST['requestedUser'];
     
