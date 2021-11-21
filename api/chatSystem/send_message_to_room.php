@@ -33,6 +33,9 @@
    &&isset($sendingMessage)//ve gönderilen mesaj set edilmişse
    &&in_array($roomId,explode(",",$_SESSION['connectedRooms'])))// ve gönderen kişinin bağlanma yetkisi varsa.
    {
+        if((strlen($sendingMessage) - MAX_MESSAGE_LENGTH)>0){
+            $sendingMessage = substr($sendingMessage,0,MAX_MESSAGE_LENGTH);
+        }
         //Gönderilecek mesaj json formatına dönüştürülür.
         $jsonSendingMessage = "{\"sender\" : \"{$sender}\" ,
         \"message\" : \"{$sendingMessage}\",

@@ -10,11 +10,7 @@
       
       ->Arkadaşlık isteği gönderiliyor artık isteğin görüntülenmesi(bildirimler kısmında) ve kabul edilmesi ile ilgili kısımlar kaldı.(ok)  
       
-      ->Sonrasında ise mesaj odasında bu kişileri kendi odalarımıza ekleyebilmek ve takip ettiğimiz arkadaşların postlarını görüntüleyebilmek var diyebilirim(ok)
-      
-      ->Kişinin yazı yazma hakkını elinden alma yetkisi 
-      
-      ->Yayında olan bir yazıyı eğer admin yazmamışsa kaldırma yetkisi.   
+      ->Sonrasında ise mesaj odasında bu kişileri kendi odalarımıza ekleyebilmek ve takip ettiğimiz arkadaşların postlarını görüntüleyebilmek var diyebilirim(ok)  
       
       ->Yazdıkları yazıları hiçbir suale tabi olmadan yayınlama yetkisi.(ok) 
       
@@ -60,6 +56,24 @@ Güncellemeler 19 Kasım 2021:
       Yan barda resim bulunan kısım yuvarlak bir çerçeve içerisine alındı.
       Authorların kendi profillerini düzenlerken resim eklemelerine düzenleme getirildi.
       Post resmi eklemek istediğimizde artık maximum sınır 3MB ve yüklenebilecek dosya tipleri png jpg ve jpeg olarak düzenlendi
+
+Güncellemeler 19 Kasım 2021 (release_version):
+      Yan bardaki bir bug olan olan arkadaşlarımın paylaşımlarını göster dediğinde eğer arkadaşın yoksa hata veren kod düzeltildi.
+      Mesajlaşma sistemine arkadaş ekle getirildi.
+      Gönderilen mesajlarda 20 karakter maximum sınır konuldu.
+      Kendi paylaşımlarımızı görmemiz için yan bara özellik eklendi.
+      Adminlerin kişilern postlarını onayladıklarında kendileri yazmış gibi gösteren bug düzeltildi.
+      Yorum sistemi çalışmıyordu onarıldı.
+      Alt bardaki sosyal medya ikonlarına tıkladığımızda yeni sekmede açılması sağlandı. Hakkımızda kısmına sitenin açıklamasını yapan bir youtube videosu eklendi.
+      Site kuralları kısmı siteyi fork eden Oztas-jpg tarafından eklendi(teşekkürler)
+      Aynı kişiye  tekrar tekrar arkadaşlık isteği gönderilmesi engellendi
+      Arkadaş olduğumuz bir kişiye tekrar arkadaşlık göndermemiz engellendi.
+
+      Eksikler:
+            Arkadaşlıktan çıkarmak
+            Odadan çıkarmak
+            Yan barı alt kısmı çok boş kalıyor
+            
 
 
       

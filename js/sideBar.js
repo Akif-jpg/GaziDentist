@@ -29,3 +29,11 @@ function openFriendsP() {
         document.getElementById("subscription").style.display = "none";
     }
 }
+
+function openOwnerP() {
+    if (document.getElementById("myPosts").style.display == "none" || document.getElementById("myPosts").style.display == "") {
+        document.getElementById("myPosts").style.display = "block";
+    } else {
+        document.getElementById("myPosts").style.display = "none";
+    }
+}
